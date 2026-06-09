@@ -8,12 +8,11 @@ int main(int argc, char* argv[])
 
     romfsInit();
 
-    rc = webOfflineCreate(&config, "romfs:/index.html");
+    rc = webOfflineCreate(&config, "romfs:/");
     if (R_SUCCEEDED(rc)) {
         webConfigSetWhitelist(&config, ".*");
         webConfigSetFooter(&config, false);
         webConfigSetBackForwardButton(&config, false);
-        webConfigSetBootDisplayKind(&config, WebBootDisplayKind_Black);
         webConfigShow(&config, &reply);
     }
 
