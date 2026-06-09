@@ -22,7 +22,7 @@ static size_t write_cb(void *ptr, size_t size, size_t nmemb, Buf *b) {
 
 int main(int argc, char *argv[]) {
     socketInitializeDefault();
-    nifmInitialize(NifmClientType_System);
+    nifmInitialize(NifmServiceType_System);
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
     IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
@@ -87,9 +87,12 @@ int main(int argc, char *argv[]) {
     SDL_RenderPresent(ren);
 
     // Wait for + to quit
+    PadState pad;
+    padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+    padInitializeDefault(&pad);
     while (appletMainLoop()) {
-        hidScanInput();
-        if (hidKeysDown(CONTROLLER_P1_AUTO) & KEY_PLUS) break;
+        padUpdate(&pad);
+        if (padGetButtonsDown(&pad) & HidNpadButton_Plus) break;
         SDL_Delay(16);
     }
 
