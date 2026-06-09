@@ -37,7 +37,8 @@ ASFLAGS  := -g $(ARCH)
 
 LDFLAGS  = -specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS     := -lSDL2_image -lSDL2 -lcurl -lz -lnx
+LIBS     := -lSDL2_image -lSDL2 -lEGL -lglad -lglapi -ldrm_nouveau \
+            -ljpeg -lpng -lwebp -lz -lm -lcurl -lnx
 
 ROMFS    := romfs
 

@@ -15,10 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install SDL2 and curl
+      - name: Install dependencies
         run: |
           for i in 1 2 3 4 5; do
-            dkp-pacman -Sy --noconfirm switch-sdl2 switch-sdl2_image switch-curl && break
+            dkp-pacman -Sy --noconfirm \
+              switch-sdl2 \
+              switch-sdl2_image \
+              switch-libpng \
+              switch-libjpeg-turbo \
+              switch-libwebp \
+              switch-mesa \
+              switch-curl && break
             echo "Attempt $i failed, retrying in 30s..."
             sleep 30
           done
