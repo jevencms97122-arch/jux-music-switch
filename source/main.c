@@ -10,7 +10,6 @@ int main(int argc, char* argv[])
     if (R_SUCCEEDED(rc)) {
         webConfigSetWhitelist(&config, ".*");
         webConfigSetFooter(&config, false);
-        webConfigSetDisplayUrlKind(&config, WebDisplayUrlKind_None);
         webConfigShow(&config, &reply);
     }
 
