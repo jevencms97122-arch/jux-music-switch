@@ -21,6 +21,7 @@ TARGET      := jux-music
 BUILD       := build
 SOURCES     := source
 INCLUDES    := include
+ROMFS       := romfs
 
 #---------------------------------------------------------------------------------
 # Options
@@ -103,7 +104,7 @@ DEPENDS := $(OFILES:.o=.d)
 all: $(OUTPUT).nro
 
 $(OUTPUT).nro: $(OUTPUT).elf $(OUTPUT).nacp
-	@elf2nro $< $@ --nacp=$(word 2,$^) $(if $(APP_ICON),--icon=$(APP_ICON))
+	@elf2nro $< $@ --nacp=$(word 2,$^) $(if $(APP_ICON),--icon=$(APP_ICON)) $(if $(ROMFS),--romfsdir=$(TOPDIR)/$(ROMFS))
 	@echo built ... $(notdir $@)
 
 $(OUTPUT).nacp:
