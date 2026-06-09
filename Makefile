@@ -21,7 +21,6 @@ TARGET      := jux-music
 BUILD       := build
 SOURCES     := source
 INCLUDES    := include
-ROMFS       := romfs
 
 #---------------------------------------------------------------------------------
 # Options

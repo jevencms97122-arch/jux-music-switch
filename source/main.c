@@ -6,16 +6,13 @@ int main(int argc, char* argv[])
     WebCommonConfig config;
     WebCommonReply reply;
 
-    romfsInit();
-
-    rc = webOfflineCreate(&config, "romfs:/");
+    rc = webPageCreate(&config, "http://188.115.125.74:3000/jux");
     if (R_SUCCEEDED(rc)) {
         webConfigSetWhitelist(&config, ".*");
         webConfigSetFooter(&config, false);
-        webConfigSetBackForwardButton(&config, false);
+        webConfigSetDisplayUrlKind(&config, WebDisplayUrlKind_None);
         webConfigShow(&config, &reply);
     }
 
-    romfsExit();
     return 0;
 }
