@@ -21,14 +21,29 @@ jobs:
             dkp-pacman -Sy --noconfirm \
               switch-sdl2 \
               switch-sdl2_image \
+              switch-sdl2_ttf \
+              switch-sdl2_mixer \
               switch-libpng \
               switch-libjpeg-turbo \
               switch-libwebp \
+              switch-freetype \
+              switch-mpg123 \
+              switch-libopus \
+              switch-libopusfile \
+              switch-libvorbis \
+              switch-libogg \
               switch-mesa \
               switch-curl && break
             echo "Attempt $i failed, retrying in 30s..."
             sleep 30
           done
+
+      - name: Download cJSON
+        run: |
+          curl -fsSL -o source/cjson.h \
+            "https://raw.githubusercontent.com/DaveGamble/cJSON/master/cJSON.h"
+          curl -fsSL -o source/cjson.c \
+            "https://raw.githubusercontent.com/DaveGamble/cJSON/master/cJSON.c"
 
       - name: Build NRO
         run: |
