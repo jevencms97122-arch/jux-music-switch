@@ -15,9 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Update libnx
+      - name: Install SDL2 and curl
         run: |
-          dkp-pacman -Sy --noconfirm switch-libnx || true
+          dkp-pacman -Sy --noconfirm \
+            switch-sdl2 \
+            switch-sdl2_image \
+            switch-curl
 
       - name: Build NRO
         run: |

@@ -37,7 +37,9 @@ ASFLAGS  := -g $(ARCH)
 
 LDFLAGS  = -specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS     := -lnx
+LIBS     := -lSDL2_image -lSDL2 -lcurl -lz -lnx
+
+ROMFS    := romfs
 
 #---------------------------------------------------------------------------------
 # no real need to edit below this line unless you need to add additional rules
@@ -63,9 +65,12 @@ endif
 
 export OFILES   := $(CFILES:.c=.o) $(CPPFILES:.cpp=.o) $(SFILES:.s=.o)
 export INCLUDE  := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
-                   -I$(DEVKITPRO)/libnx/include
+                   -I$(DEVKITPRO)/libnx/include \
+                   -I$(DEVKITPRO)/portlibs/switch/include \
+                   -I$(DEVKITPRO)/portlibs/switch/include/SDL2
 
-export LIBPATHS := -L$(DEVKITPRO)/libnx/lib
+export LIBPATHS := -L$(DEVKITPRO)/libnx/lib \
+                   -L$(DEVKITPRO)/portlibs/switch/lib
 
 ifeq ($(strip $(ICON)),)
     icons := $(wildcard *.jpg)
